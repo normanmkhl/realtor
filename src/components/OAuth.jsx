@@ -3,6 +3,8 @@ import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function OAuth() {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ export default function OAuth() {
         await setDoc(docRef, {
           name: user.displayName,
           email: user.email,
-          timestamp: serverTimeStamp(),
+          timestamp: serverTimestamp(),
         });
       }
       navigate("/");
